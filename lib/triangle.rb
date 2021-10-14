@@ -3,9 +3,24 @@ class Triangle
   
 
   def initialize side_a, side_b, side_c
+    
+    if side_a <= 0 || side_b <= 0 || side_c <= 0
+      raise TriangleError
+    end
+
+    if side_a >= (side_b + side_c) || side_b >= (side_a + side_c) || side_c >= (side_a + side_b)
+      raise TriangleError
+    end
+
+    if side_a == nil || side_b == nil || side_c == nil
+      raise TriangleError
+    end
+
     @side_a = side_a
     @side_b = side_b
     @side_c = side_c
+
+
   end
 
   def kind
@@ -15,6 +30,12 @@ class Triangle
       :isosceles
     else
       :scalene
+    end
+  end
+
+  class TriangleError < StandardError
+    def message
+      "This is not a valid triangle."
     end
   end
 
